@@ -1,0 +1,22 @@
+Suppose that you have an N-story building and plenty of eggs. An egg breaks if it is dropped from floor T or higher and does not break otherwise. Your goal is to devise a strategy to determine the value of T given the following limitations on the number of eggs and tosses:
+
+Version 0: 1 egg, ≤T tosses
+
+Version 1: ~1 lg(N) eggs and ~1 lg(N) tosses. (lg is log base 2)
+
+Version 2: ~1 lg(T) eggs and ~2 lg(T) tosses
+
+Version 3: 2 eggs and ~ 2sqrt(N) tosses
+
+Version 4: 2 eggs and ≤ 2sqrt(2T) tosses
+
+For version 0, a simple iterative search starting from the 1st floor and working up to the Nth floor in increments of 1 will work.
+
+For version 1, a binary search across the floors 1 to N will work.
+
+For version 2, I think you can iteratively double floors, visiting 1, then 2, then 4, then 8, etc. until the egg breaks at floor 2k. Then you can binary search across 2k−1 and 2k 
+
+For version 3, you can go iteratively go across floors with incrementing by sqrt(N): first visiting 0, then sqrt(N), then 2sqrt(N), etc. Once the egg breaks at stage ksqrt(N), iterate across the range (k−1)sqrt(N) and ksqrt(N) one floor at a time.
+
+For version 4, take intervals 1,2,3,⋯ and then it iterate through the unknown elements. This achieves the desired bound since solving n(n+1) / 2 = T ⟹ n ≤ 2sqrt(T). 
+Yields that the first egg will be thrown at most sqrt(2T) times. Being the last interval sqrt(2T), the second egg will be thrown(at most) the same number of times.
